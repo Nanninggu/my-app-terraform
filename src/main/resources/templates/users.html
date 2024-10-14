@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>All Users</title>
+    <!-- Google Fonts와 Material Icons를 로드하여 폰트와 아이콘을 설정합니다. -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <!-- Materialize CSS를 로드하여 스타일을 적용합니다. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        /* 내부 스타일을 정의하여 배경색, 폰트, 카드 스타일 등을 설정합니다. */
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
+        }
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .card-header {
+            background-color: #3f51b5;
+            color: white;
+            border-radius: 10px 10px 0 0;
+            padding: 16px;
+        }
+        .btn {
+            margin: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <!-- container 클래스를 사용하여 페이지의 중앙에 내용을 배치합니다. -->
+    <div class="row justify-content-center">
+        <div class="col s12 m10">
+            <!-- card 클래스를 사용하여 사용자 목록을 담는 카드 형태의 UI를 만듭니다. -->
+            <div class="card">
+                <div class="card-header center-align">
+                    <!-- 카드의 헤더에는 "All Users"라는 제목이 있습니다. -->
+                    <h1 class="mb-0">All Users</h1>
+                </div>
+                <div class="card-content">
+                    <!-- 카드의 내용에는 사용자 목록을 보여주는 테이블이 있습니다. -->
+                    <table class="striped highlight">
+                        <thead>
+                        <!-- 테이블 헤더에는 ID, Name, Email, Actions 열이 있습니다. -->
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <!-- th:each 속성을 사용하여 서버에서 전달된 사용자 목록을 반복하여 각 사용자의 정보를 테이블 행으로 출력합니다. -->
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.id}"></td>
+                            <td th:text="${user.name}"></td>
+                            <td th:text="${user.email}"></td>
+                            <td>
+                                <!-- 각 사용자 행에는 수정 버튼과 삭제 버튼이 있습니다. -->
+                                <a th:href="@{/view/users/edit/{id}(id=${user.id})}"
+                                   class="btn yellow darken-2">Edit</a>
+                                <a th:href="@{/view/users/delete/{id}(id=${user.id})}" class="btn red">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="right-align">
+                        <!-- 테이블 아래에는 새로운 사용자를 생성할 수 있는 버튼이 있습니다. -->
+                        <a href="/view/users/create" class="btn blue">Create New User</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Materialize JS 로드: Materialize CSS의 JavaScript 파일을 로드하여 인터랙티브한 UI 요소를 사용할 수 있게 합니다. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
