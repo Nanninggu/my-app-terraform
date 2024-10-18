@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/users") // 이 컨트롤러의 기본 URL 경로를 설정합니다. localhost:8080/users
 public class UserController {
 
     // UserService를 주입받아 사용
