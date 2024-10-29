@@ -3,8 +3,6 @@ package com.example.demo.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,6 +25,8 @@ public class SecurityConfig {
                         .requestMatchers("/h2-console/**").permitAll()
                         // "/users/**" 경로에 대한 요청은 인증이 필요하지 않습니다.
                         .requestMatchers("/users/**").permitAll()
+                        // /server-environment 경로에 대한 요청은 인증이 필요하지 않습니다.
+                        .requestMatchers("/server-environment").permitAll()
                         // "/view/users" 경로에 대한 요청은 인증이 필요합니다.
                         .requestMatchers("/view/users").authenticated()
                         // 그 외의 모든 요청은 인증이 필요합니다.
@@ -39,11 +39,6 @@ public class SecurityConfig {
                 )
                 // HTTP 기본 인증을 설정합니다.
                 .httpBasic(withDefaults());
-
-//        // H2 콘솔을 위해 CSRF 보호를 비활성화합니다.
-//        http.csrf(AbstractHttpConfigurer::disable);
-//        // H2 콘솔을 위해 프레임 옵션을 비활성화합니다.
-//        http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable));
 
         return http.build();
     }

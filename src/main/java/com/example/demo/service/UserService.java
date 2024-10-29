@@ -16,7 +16,7 @@ public class UserService {
         this.userMapper = userMapper;
     }
 
-    // 사용자 정보 조회
+    // 사용자 정보 조회 (호출한 곳으로 반환한다.)
     public List<User> getAllUsers() {
         return userMapper.findAll();
     }

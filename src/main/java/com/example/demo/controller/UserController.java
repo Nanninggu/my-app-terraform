@@ -13,16 +13,18 @@ import java.util.List;
 @RequestMapping("/users") // 이 컨트롤러의 기본 URL 경로를 설정합니다. localhost:8080/users
 public class UserController {
 
-    // UserService를 주입받아 사용
+    // UserService를 주입받아 사용 (주입 받아 쓴다는 의미는 가져다 쓴다는 의미로 이해하면 됨)
     private final UserService userService;
 
+    // UserController 생성자, UserService를 주입받아 초기화합니다.
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    // 모든 사용자 정보 조회
+    // 모든 사용자 정보 조회 (리턴은 호출한 곳으로 보내는 것)
     @GetMapping
     public List<User> getAllUsers() {
+        // UserService를 통해 모든 사용자 정보를 가져옵니다.
         return userService.getAllUsers();
     }
 
@@ -30,20 +32,24 @@ public class UserController {
     @PostMapping("/create")
     public User createUser(@RequestParam String name,
                            @RequestParam String email) {
+        // UserService를 통해 새로운 사용자를 생성합니다.
         return userService.createUser(name, email);
     }
 
     // 사용자 정보 수정
+    // 리소스의 고유 식별자를 나타낼 때 주로 사용됩니다. 필터링, 검색, 페이징 등의 추가적인 정보를 전달할 때 주로 사용됩니다.
     @PutMapping("/{id}")
     public User updateUser(@PathVariable Long id,
                            @RequestParam String name,
                            @RequestParam String email) {
+        // UserService를 통해 사용자의 정보를 업데이트합니다.
         return userService.updateUser(id, name, email);
     }
 
     // 사용자 삭제
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
+        // UserService를 통해 사용자를 삭제합니다.
         userService.deleteUser(id);
     }
 
