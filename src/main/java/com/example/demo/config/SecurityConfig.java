@@ -26,7 +26,7 @@ public class SecurityConfig {
                         // "/users/**" 경로에 대한 요청은 인증이 필요하지 않습니다.
                         .requestMatchers("/users/**").permitAll()
                         // /server-environment 경로에 대한 요청은 인증이 필요하지 않습니다.
-                        .requestMatchers("/server-environment").permitAll()
+                        .requestMatchers("/server-environment/**").permitAll()
                         // "/view/users" 경로에 대한 요청은 인증이 필요합니다.
                         .requestMatchers("/view/users").authenticated()
                         // 그 외의 모든 요청은 인증이 필요합니다.
